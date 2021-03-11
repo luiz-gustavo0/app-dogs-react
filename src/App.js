@@ -12,8 +12,12 @@ function App() {
       <BrowserRouter>
         <Header />
         <Switch>
-          <Route path='/' exact component={Home} />
-          <Route path='/login' exact component={Login} />
+          <Route exact path='/'>
+            <Home />
+          </Route>
+          <Route path='/login'>
+            <Login />
+          </Route>
         </Switch>
         <Footer />
       </BrowserRouter>
