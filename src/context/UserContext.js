@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import { tokenPost, userGet } from '../services/api';
+import api from '../services/api';
 
 export const UserContext = React.createContext();
 
@@ -12,6 +12,41 @@ export const UserStorage = ({ children }) => {
 
   const history = useHistory();
 
+  async function getUser(token) {
+    const response = await api.get('/users', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    setData(response.data);
+    setLogin(true);
+  }
+
+  async function userLogin(email, password) {
+    try {
+      setError(null);
+      setLoading(true);
+      const response = await api.post('/login', { email, password });
+
+      if (response.status !== 200) {
+        throw new Error(response);
+      }
+
+      const token = response.data.token;
+      localStorage.setItem('token', token);
+
+      await getUser(token);
+      history.push('/conta');
+    } catch (err) {
+      console.log(err.response);
+      setError(err.response.data.message);
+      setLogin(false);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   const userLogout = useCallback(async () => {
     setData(null);
     setError(null);
@@ -21,40 +56,6 @@ export const UserStorage = ({ children }) => {
     history.push('/login');
   }, [history]);
 
-  async function getUser(token) {
-    const { url, options } = userGet(token);
-    const response = await fetch(url, options);
-    const json = await response.json();
-
-    setData(json);
-    setLogin(true);
-  }
-
-  async function userLogin(email, password) {
-    try {
-      setError(null);
-      setLoading(true);
-      const { url, options } = tokenPost({ email, password });
-
-      const response = await fetch(url, options);
-      const json = await response.json();
-
-      if (!response.ok) throw new Error(`Error: ${json.message}`);
-
-      const { token } = json;
-
-      localStorage.setItem('token', token);
-      await getUser(token);
-
-      history.push('/conta');
-    } catch (err) {
-      setError(err.message);
-      setLogin(false);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   useEffect(() => {
     async function autoLogin() {
       const token = localStorage.getItem('token');
@@ -62,9 +63,9 @@ export const UserStorage = ({ children }) => {
         try {
           setError(null);
           setLoading(true);
-          const response = await getUser(token);
-          if (!response.ok) throw new Error('Token inválido');
+          await getUser(token);
         } catch (err) {
+          setError(err.message);
           userLogout();
         } finally {
           setLoading(false);
