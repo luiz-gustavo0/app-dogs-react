@@ -29,6 +29,8 @@ export const UserStorage = ({ children }) => {
       setLoading(true);
       const response = await api.post('/login', { email, password });
 
+      console.log(response);
+
       if (response.status !== 200) {
         throw new Error(response);
       }

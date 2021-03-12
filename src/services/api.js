@@ -6,4 +6,11 @@ const api = axios.create({
   baseURL: API_URL,
 });
 
+export function userPost(body) {
+  return {
+    url: '/users',
+    data: body,
+  };
+}
+
 export default api;
