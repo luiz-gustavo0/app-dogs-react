@@ -1,30 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import Input from '../Input';
 import Button from '../Button';
 import useForm from '../../hooks/useForm';
+import { UserContext } from '../../context/UserContext';
 
 const LoginForm = () => {
   const { url } = useRouteMatch();
   const email = useForm('email');
   const password = useForm();
 
+  const { userLogin, error, loading } = useContext(UserContext);
+
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const response = await fetch('http://localhost:4000/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(),
-    });
-
-    console.log(response);
-
-    const json = await response.json();
-
-    console.log(json);
+    if (email.validate() && password.validate()) {
+      userLogin(email.value, password.value);
+    }
   }
 
   return (
@@ -34,7 +27,13 @@ const LoginForm = () => {
         <Input label='Email' type='email' name='email' {...email} />
         <Input label='Senha' type='password' name='password' {...password} />
 
-        <Button>Entrar</Button>
+        {loading ? (
+          <Button disabled>Carregando...</Button>
+        ) : (
+          <Button>Entrar</Button>
+        )}
+
+        {error && <p>{error}</p>}
       </form>
       <Link to={`${url}/criar`}>Cadastro</Link>
     </section>
