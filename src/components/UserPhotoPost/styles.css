@@ -1,0 +1,23 @@
+.photo-post {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.photo-post #file {
+  margin-bottom: 1rem;
+}
+
+.preview {
+  border-radius: 1rem;
+  background-size: contain;
+  background-position: center center;
+}
+
+.preview::after {
+  content: '';
+  display: block;
+  height: 0px;
+  padding-bottom: 100%;
+}
