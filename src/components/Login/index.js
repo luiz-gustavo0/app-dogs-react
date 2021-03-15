@@ -12,7 +12,9 @@ const Login = () => {
   const { login } = useContext(UserContext);
   const { path } = useRouteMatch();
 
-  if (login === true) <Redirect to='/conta' />;
+  if (login === true) {
+    <Redirect to='/conta' />;
+  }
   return (
     <section className='section-login'>
       <div className='section-login-forms'>
