@@ -7,6 +7,7 @@ import Login from './components/Login';
 import User from './components/User';
 
 import './app.css';
+import ProtectedRouter from './components/ProtectedRouter';
 
 function App() {
   return (
@@ -21,9 +22,7 @@ function App() {
             <Route path='/login'>
               <Login />
             </Route>
-            <Route path='/conta'>
-              <User />
-            </Route>
+            <ProtectedRouter path='/conta' component={User} /> >
           </Switch>
           <Footer />
         </UserStorage>
