@@ -38,14 +38,12 @@ $ yarn install
 ### Iniciar o projeto
 
 ```
-$ yarn sart
+$ yarn start
 ```
 
 ## Author
 
-👤 **Author**
-
-- GitHub: [@githubhandle](https://github.com/luiz-gustavo0)
+- GitHub: [@luiz-gustavo0](https://github.com/luiz-gustavo0)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/luiz-gustavo0/)
 
 ## 📝 License
