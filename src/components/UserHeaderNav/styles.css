@@ -1,0 +1,38 @@
+.nav-user-header {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.nav-user-header a,
+.nav-user-header button {
+  background: #eee;
+  border-radius: 0.2rem;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  transition: 0.1s;
+  cursor: pointer;
+}
+
+.nav-user-header a:hover,
+.nav-user-header a:focus,
+.nav-user-header button:hover,
+.nav-user-header button:focus {
+  background: white;
+  box-shadow: 0 0 0 3px #eee;
+  border-color: #333;
+}
+
+.nav-user-header a.active {
+  background: white;
+  box-shadow: 0 0 0 3px #fea;
+  border-color: #fb1;
+}
+
+.nav-user-header a.active svg > * {
+  fill: #fb1;
+}
