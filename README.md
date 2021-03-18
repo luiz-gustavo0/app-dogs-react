@@ -2,13 +2,13 @@
 
 # Dogs App
 
-![screenshot](./src/assets/screenshot-app.png)
+O projeto Dogs App é um site para compartilhamento de fotos de cachorros, que foi desenvolvido no curso de ReactJS da Origamid.
 
-> O projeto Dogs App é um site para compartilhamento de fotos de cachorros, que foi desenvolvido no curso de ReactJS da Origamid.
+![screenshot](./src/assets/screenshot-app.png)
 
 ## Tecnologias utilizadas
 
-- Reacts
+- ReactJS
 - Axios
 
 <!-- ## Live Demo -->

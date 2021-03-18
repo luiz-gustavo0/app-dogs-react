@@ -24,7 +24,7 @@ const useFetch = () => {
       setError(err.response.data.message);
     } finally {
       setLoading(false);
-      setData(response);
+      setData(response.data);
       console.log('Response usefetch: ', response);
       return { response };
     }
