@@ -24,7 +24,7 @@ function App() {
             </Route>
             <ProtectedRouter path='/conta' component={User} /> >
           </Switch>
-          <Footer />
+          {/* <Footer /> */}
         </UserStorage>
       </BrowserRouter>
     </>
